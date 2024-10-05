@@ -10,9 +10,10 @@ function App() {
     return savedTasks ? JSON.parse(savedTasks) : []
   });
   const [taskInput, setTaskInput] = useState("");
+  const [clickDot, setClickDot] = useState(false)
   return (
     <div>
-      <MyContext.Provider value={{tasks,taskInput,setTasks,setTaskInput}}>
+      <MyContext.Provider value={{tasks,taskInput,setTasks,setTaskInput,clickDot,setClickDot}}>
       <BrowserRouter>
        <Routes>
         <Route path="/" element={<Home />}/>

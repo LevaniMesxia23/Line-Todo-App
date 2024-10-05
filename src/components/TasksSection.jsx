@@ -1,15 +1,20 @@
 import { MyContext } from "../App";
 import { useContext, useEffect } from "react";
 import { format } from "date-fns";
+import AOS from "aos";
 
 function TasksSection() {
-  const { tasks, setTasks, taskInput, setTaskInput } = useContext(MyContext);
+  const { tasks, setTasks, taskInput, setTaskInput, clickDot, setClickDot } = useContext(MyContext);
   const formattedDate = format(new Date(), "dd/MM/yy");
+
+  useEffect(() => {
+    AOS.init({ duration: 500 });
+  }, []);
 
   useEffect(()=>{
     localStorage.setItem('tasks', JSON.stringify(tasks))
   })
-  
+
   const handleAddTask = () => {
     if (taskInput.trim()) {
       setTasks([...tasks, taskInput.trim()]);
@@ -23,6 +28,11 @@ function TasksSection() {
       handleAddTask();
     }
   };
+
+  const handleClickDots = (index) => {
+    setClickDot(prevIndex => (prevIndex === index ? null : index));
+  };
+
   return (
     <div className=" px-4">
       <div className="flex justify-center mt-8">
@@ -55,7 +65,7 @@ function TasksSection() {
       </div>
 
       {tasks.map((task, index) => (
-        <div key={index} className=" bg-red-500 rounded-[0.625rem] mb-6">
+        <div key={index} className={`  bg-red-500 rounded-[0.625rem] mb-6`}>
           <div className="flex flex-col justify-between px-4 py-3 ">
             <div className="bg-[#FDF8F2] max-w-[8rem] h-[30px] px-[10px] rounded-full flex justify-start gap-2 items-center mb-4">
               <svg
@@ -83,8 +93,9 @@ function TasksSection() {
               <span className=" text-[#252931]">{task}</span>
             </div>
 
-            <div className=" flex justify-end mt-[1.62rem]">
+            <div className=" flex justify-end mt-[1.62rem] relative">
               <svg
+                onClick={() => handleClickDots(index)}
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -98,6 +109,14 @@ function TasksSection() {
                   strokeWidth="0.4"
                 />
               </svg>
+              {clickDot === index && <div className=" bg-white absolute py-2 px-[0.88rem] rounded-lg mt-7" data-aos="fade-down">
+                <ul>
+                  <li>Importance</li>
+                  <li>Complete</li>
+                  <li>Edit</li>
+                  <li>Delete</li>
+                </ul>
+              </div>}
             </div>
           </div>
         </div>
