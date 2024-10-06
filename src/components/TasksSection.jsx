@@ -5,7 +5,7 @@ import AOS from "aos";
 import "aos/dist/aos.css"
 
 function TasksSection() {
-  const { tasks, setTasks, taskInput, setTaskInput, clickDot, setClickDot } = useContext(MyContext);
+  const { tasks, setTasks, taskInput, setTaskInput, clickDot, setClickDot,searchTodo, searchClick } = useContext(MyContext);
   const formattedDate = format(new Date(), "dd/MM/yy");
 
   useEffect(() => {
@@ -34,6 +34,8 @@ function TasksSection() {
     setClickDot(prevIndex => (prevIndex === index ? null : index));
   };
 
+  const filteredTasks = tasks.filter(task => task.toLowerCase().includes(searchTodo));
+  console.log(searchTodo)
   return (
     <div className=" px-4">
       <div className="flex justify-center mt-8">
@@ -65,7 +67,7 @@ function TasksSection() {
         </div>
       </div>
 
-      {tasks.map((task, index) => (
+      {(searchClick ? filteredTasks : tasks ).map((task, index) => (
         <div key={index} className="  bg-red-500 rounded-[0.625rem] mb-6">
           <div className="flex flex-col justify-between px-4 py-3 ">
             <div className="bg-[#FDF8F2] max-w-[8rem] h-[30px] px-[10px] rounded-full flex justify-start gap-2 items-center mb-4">

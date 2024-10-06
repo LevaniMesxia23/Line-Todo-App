@@ -11,9 +11,11 @@ function App() {
   });
   const [taskInput, setTaskInput] = useState("");
   const [clickDot, setClickDot] = useState(false)
+  const [searchClick, setSearchClick] = useState(false)
+  const [searchTodo, setSearchTodo] = useState('')
   return (
     <div>
-      <MyContext.Provider value={{tasks,taskInput,setTasks,setTaskInput,clickDot,setClickDot}}>
+      <MyContext.Provider value={{tasks,taskInput,setTasks,setTaskInput,clickDot,setClickDot,searchClick,setSearchClick,searchTodo, setSearchTodo}}>
       <BrowserRouter>
        <Routes>
         <Route path="/" element={<Home />}/>
