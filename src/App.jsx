@@ -5,6 +5,7 @@ import { createContext, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Important from "./pages/Important";
 import TodoApp from "./components/TodoApp";
+import ResultsPage from "./pages/ResultsPage";
 export const MyContext = createContext(null);
 function App() {
   const [tasks, setTasks] = useState(() => {
@@ -34,6 +35,7 @@ function App() {
           setClickImportance,
         }}
       >
+
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -41,6 +43,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/important" element={<Important />} />
             <Route path="/rame" element={<TodoApp />} />
+            <Route path="/resultspage" element={<ResultsPage />} />
           </Routes>
         </BrowserRouter>
       </MyContext.Provider>
