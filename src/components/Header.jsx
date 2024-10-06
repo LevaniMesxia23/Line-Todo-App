@@ -30,7 +30,7 @@ function Header() {
   }, [burgerClicked]);
 
   return (
-    <header className="flex justify-between items-center p-4 bg-white shadow-md relative">
+    <header className="flex justify-between items-center p-4 bg-white shadow-md relative z-20">
       <Hamburger
         toggled={burgerClicked}
         toggle={handleBurger}
