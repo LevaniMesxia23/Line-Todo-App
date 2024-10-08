@@ -16,34 +16,6 @@ function App() {
   const [searchClick, setSearchClick] = useState(false);
   const [searchTodo, setSearchTodo] = useState("");
 
-
-  const handleClickDots = (index) => {
-    setClickDot(prevIndex => (prevIndex === index ? null : index));
-  };
-
-  const deleteTask = (index) => {
-    const updatedTasks = tasks.filter((_, i) => i !== index);
-    setTasks(updatedTasks);
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-    setClickDot(false)
-  };
-
-  const handleAddImportance = (index) => {
-    let arr = tasks.map((item, i) => {
-      if(index !== i) {
-        return item
-      } else {
-        return {
-          text : item.text,
-          isImportance : !item.isImportance,
-          completed : item.completed
-        }
-      }
-    })
-    handleClickDots(false)
-    console.log(arr);
-    setTasks(arr)
-  }
   return (
     <div>
       <MyContext.Provider
@@ -58,12 +30,8 @@ function App() {
           setSearchClick,
           searchTodo,
           setSearchTodo,
-          deleteTask,
-          handleAddImportance,
-          handleClickDots
         }}
       >
-
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
