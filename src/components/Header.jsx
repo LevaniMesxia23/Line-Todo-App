@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { Twirl as Hamburger } from "hamburger-react";
 import { Link } from "react-router-dom";
 import { MyContext } from "../App";
-
+import Result from "../../public/evaluation.png"
 function Header() {
   const { searchClick, setSearchClick, setSearchTodo } = useContext(MyContext);
   const [burgerClicked, setBurgerClicked] = useState(false);
@@ -166,6 +166,14 @@ function Header() {
             
               <span className="z-50">Important</span>
           </li>
+          </Link>
+
+          <Link to={"/resultspage"} className=" w-full">
+            <li className="flex gap-3 hover:bg-[#C7CAD0] py-[0.625rem] pl-4 w-full rounded">
+              <img className="w-[22px] h-[22px]" src={Result} alt="" />
+
+              <span className="z-50">Results</span>
+            </li>
           </Link>
         </ul>
       </nav>
