@@ -5,7 +5,7 @@ function TaskSearch() {
   const {taskInput, setTaskInput,setTasks,tasks} = useContext(MyContext)
   const handleAddTask = () => {
     if (taskInput.trim()) {
-      setTasks([...tasks, taskInput.trim()]);
+      setTasks([...tasks, {text: taskInput, completed : false, isImportance : false}]);
       setTaskInput("");
       console.log(taskInput)
     }

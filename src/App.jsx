@@ -4,7 +4,6 @@ import Home from "./pages/Home";
 import { createContext, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Important from "./pages/Important";
-import TodoApp from "./components/TodoApp";
 import ResultsPage from "./pages/ResultsPage";
 export const MyContext = createContext(null);
 function App() {
@@ -16,7 +15,35 @@ function App() {
   const [clickDot, setClickDot] = useState(false);
   const [searchClick, setSearchClick] = useState(false);
   const [searchTodo, setSearchTodo] = useState("");
-  const [clickImportance, setClickImportance] = useState(false);
+
+
+  const handleClickDots = (index) => {
+    setClickDot(prevIndex => (prevIndex === index ? null : index));
+  };
+
+  const deleteTask = (index) => {
+    const updatedTasks = tasks.filter((_, i) => i !== index);
+    setTasks(updatedTasks);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    setClickDot(false)
+  };
+
+  const handleAddImportance = (index) => {
+    let arr = tasks.map((item, i) => {
+      if(index !== i) {
+        return item
+      } else {
+        return {
+          text : item.text,
+          isImportance : !item.isImportance,
+          completed : item.completed
+        }
+      }
+    })
+    handleClickDots(false)
+    console.log(arr);
+    setTasks(arr)
+  }
   return (
     <div>
       <MyContext.Provider
@@ -31,8 +58,9 @@ function App() {
           setSearchClick,
           searchTodo,
           setSearchTodo,
-          clickImportance,
-          setClickImportance,
+          deleteTask,
+          handleAddImportance,
+          handleClickDots
         }}
       >
 
@@ -42,7 +70,6 @@ function App() {
             <Route path="/signin" element={<Signin />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/important" element={<Important />} />
-            <Route path="/rame" element={<TodoApp />} />
             <Route path="/resultspage" element={<ResultsPage />} />
           </Routes>
         </BrowserRouter>
