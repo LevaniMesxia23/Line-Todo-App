@@ -6,33 +6,35 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { useContext } from "react"
-import { MyContext } from "../App"
+import { useContext } from "react";
+import { MyContext } from "../App";
 
 ChartJs.register(ArcElement, Title, Tooltip, Legend);
 
 function PieChart() {
-  
-  const {tasks} = useContext(MyContext)
+  const { tasks } = useContext(MyContext);
+
+  const completedTasks = tasks.filter(task => task.completed).length;
+  const inProgressTasks = tasks.filter(task => !task.completed).length;
+  const stuckTasks = tasks.filter(task => task.isImportance).length;
+  const totalTasks = tasks.length;
+
   const data = {
-    labels: ['Red', 'Blue', 'Yellow', 'Green'],
+    labels: [
+      `Completed (${((completedTasks / totalTasks) * 100).toFixed(1)}%)`,
+      `In Progress (${((inProgressTasks / totalTasks) * 100).toFixed(1)}%)`,
+      `Important (${((stuckTasks / totalTasks) * 100).toFixed(1)}%)`,
+    ],
     datasets: [
       {
-        label: 'My Pie Chart',
-        data: [300, 50, 100, 150], 
+        data: [completedTasks, inProgressTasks, stuckTasks],
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
+          '#80BC00',
+          '#FFA400',
+          '#6E7C7C',
         ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-        ],
-        borderWidth: 1,
+        borderWidth: 2, 
+        borderColor: '#FFFFFF',
       },
     ],
   };
@@ -41,17 +43,29 @@ function PieChart() {
     responsive: true,
     plugins: {
       legend: {
-        position: 'top',
-      },
-      title: {
         display: true,
-        text: 'My Pie Chart',
+        position: 'bottom',
+        align: 'start',
+        labels: {
+          boxWidth: 20,
+          padding: 20,
+        },
+      },
+      tooltip: {
+        callbacks: {
+          label: function(tooltipItem) {
+            const label = tooltipItem.label || '';
+            const value = tooltipItem.raw;
+            const percentage = ((value / totalTasks) * 100).toFixed(1);
+            return `${label}: ${value} (${percentage}%)`;
+          },
+        },
       },
     },
   };
 
   return (
-    <div>
+    <div className="flex flex-col mt-10">
       <Pie data={data} options={options} />
     </div>
   );
