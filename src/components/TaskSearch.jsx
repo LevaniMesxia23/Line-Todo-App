@@ -2,15 +2,7 @@ import { MyContext } from "../App";
 import { useContext } from "react";
 
 function TaskSearch() {
-  const {taskInput, setTaskInput,setTasks,tasks} = useContext(MyContext)
-  const handleAddTask = () => {
-    if (taskInput.trim()) {
-      setTasks([...tasks, {text: taskInput, completed : false, isImportance : false}]);
-      setTaskInput("");
-      console.log(taskInput)
-    }
-  };
-  
+  const { taskInput, setTaskInput, handleAddTask } = useContext(MyContext);
   const handleKeyPress = (e) => {
     if (e.key == "Enter") {
       e.preventDefault();
@@ -48,7 +40,7 @@ function TaskSearch() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default TaskSearch
+export default TaskSearch;

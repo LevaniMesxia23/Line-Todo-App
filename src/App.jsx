@@ -16,6 +16,26 @@ function App() {
   const [searchClick, setSearchClick] = useState(false);
   const [searchTodo, setSearchTodo] = useState("");
 
+  const getLightColor = () => {
+    const r = Math.floor(Math.random() * 156) + 100;
+    const g = Math.floor(Math.random() * 156) + 100;
+    const b = Math.floor(Math.random() * 156) + 100;
+    return `rgb(${r}, ${g}, ${b})`;
+  };
+  const handleAddTask = () => {
+    if (taskInput.trim()) {
+      const newTask = {
+        text: taskInput,
+        completed: false,
+        isImportance: false,
+        color: getLightColor(), 
+      };
+      setTasks([...tasks, newTask]);
+      setTaskInput("");
+      console.log(taskInput);
+    }
+  };
+
   return (
     <div>
       <MyContext.Provider
@@ -30,6 +50,8 @@ function App() {
           setSearchClick,
           searchTodo,
           setSearchTodo,
+          handleAddTask,
+          getLightColor
         }}
       >
         <BrowserRouter>
