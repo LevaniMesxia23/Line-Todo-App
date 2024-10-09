@@ -126,7 +126,7 @@ function Header() {
         }`}
       >
         <ul className="flex flex-col items-start p-4 space-y-4">
-          <Link to={"/"} className=" w-full">
+          <Link to={"/myday"} className=" w-full">
             <li className="flex gap-3 hover:bg-[#C7CAD0] py-[0.625rem] pl-4 w-full rounded">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

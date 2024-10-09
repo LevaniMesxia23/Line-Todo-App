@@ -8,12 +8,14 @@ function Signin() {
     onSuccess: credentialResponse => {
       const decoded = jwtDecode(credentialResponse?.credential);
       console.log(decoded);
-      navigate("/")
+      navigate("/myday")
     },
     onError: () => {
       console.log('Login Failed');
     },
   });
+
+  
 
   return (
     <div className="flex flex-col items-center px-4 sm:px-6 lg:px-8">
