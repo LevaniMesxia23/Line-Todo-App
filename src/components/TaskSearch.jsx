@@ -30,6 +30,7 @@ function TaskSearch() {
           </svg>
           <input
             type="text"
+            name="task"
             className="pl-[2.88rem] pr-3 py-2 w-full rounded-lg focus:outline-none focus:ring focus:ring-indigo-300 sm:text-sm lg:text-base"
             placeholder="Add a task"
             style={{ boxShadow: "0px 1px 8px 0px rgba(0, 0, 0, 0.25)" }}

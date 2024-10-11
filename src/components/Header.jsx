@@ -10,11 +10,13 @@ function Header() {
 
   const handleBurger = () => {
     setBurgerClicked(!burgerClicked);
+    console.log(burgerClicked)
   };
 
   const handleLinkClick = () => {
     if (burgerClicked) {
       setBurgerClicked(false);
+      console.log(burgerClicked);
     }
   };
 
@@ -23,12 +25,13 @@ function Header() {
   };
 
   useEffect(() => {
-    document.body.style.overflow = burgerClicked ? "hidden" : "auto";
-
-    return () => {
-      document.body.style.overflow = "auto";
-    };
+    if (burgerClicked) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
   }, [burgerClicked]);
+  
 
   return (
     <header className="flex justify-between items-center p-4 bg-white shadow-md relative z-20">
@@ -74,6 +77,7 @@ function Header() {
             <input
               className="bg-[#E7E8EA] pl-[48px] text-[1.4rem] font-[400] ml-8 rounded-[0.8rem] h-[40px] w-full sm:w-[250px] md:w-[300px] lg:w-[460px]"
               type="text"
+              name="search"
               placeholder="Search"
               onChange={(e) => setSearchTodo(e.target.value)}
             />
@@ -116,7 +120,7 @@ function Header() {
         }`}
       >
         <ul className="flex flex-col items-start p-4 space-y-4">
-          <Link to={"/"} className=" w-full">
+          <Link to={"/"} className=" w-full" onClick={handleLinkClick}>
             <li className="flex gap-3 hover:bg-[#C7CAD0] py-[0.625rem] pl-4 w-full rounded">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -137,7 +141,7 @@ function Header() {
             </li>
           </Link>
 
-          <Link to={"/important"} className=" w-full">
+          <Link to={"/important"} className=" w-full" onClick={handleLinkClick}>
           <li className=" flex gap-3 hover:bg-[#C7CAD0] py-[0.625rem] pl-4 w-full rounded ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -158,7 +162,7 @@ function Header() {
           </li>
           </Link>
 
-          <Link to={"/resultspage"} className=" w-full">
+          <Link to={"/resultspage"} className=" w-full" onClick={handleLinkClick}>
             <li className="flex gap-3 hover:bg-[#C7CAD0] py-[0.625rem] pl-4 w-full rounded">
               <img className="w-[22px] h-[22px]" src={Result} alt="" />
 

@@ -1,7 +1,6 @@
 import { MyContext } from "../App";
 import { useContext } from "react";
 
-
 function ResultBoxes() {
   const {tasks} = useContext(MyContext)
   let done = tasks.filter(item => item.completed)

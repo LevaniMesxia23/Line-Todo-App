@@ -11,7 +11,6 @@ import { createBrowserRouter } from "react-router-dom";
 export const MyContext = createContext(null);
 import ProtectedRoute from "./components/ProtectedRoute";
 
-
 const router = createBrowserRouter([
   {
     element: (
