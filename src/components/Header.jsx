@@ -3,6 +3,7 @@ import { Twirl as Hamburger } from "hamburger-react";
 import { Link } from "react-router-dom";
 import { MyContext } from "../App";
 import Result from "../../public/evaluation.png"
+import { UserButton } from "@clerk/clerk-react";
 function Header() {
   const { searchClick, setSearchClick, setSearchTodo } = useContext(MyContext);
   const [burgerClicked, setBurgerClicked] = useState(false);
@@ -97,18 +98,7 @@ function Header() {
         {!searchClick && (
           <div className="h-[1rem] bg-[#82868F] w-[0.0625rem]"></div>
         )}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="14"
-          height="20"
-          viewBox="0 0 14 20"
-          fill="none"
-        >
-          <path
-            d="M0.0993652 19.057C0.0993652 15.2459 3.18888 12.1564 7 12.1564C10.8111 12.1564 13.9006 15.2459 13.9006 19.057H12.1755C12.1755 16.1987 9.85833 13.8816 7 13.8816C4.14166 13.8816 1.82452 16.1987 1.82452 19.057H0.0993652ZM7 11.2938C4.14055 11.2938 1.82452 8.9778 1.82452 6.11835C1.82452 3.2589 4.14055 0.942871 7 0.942871C9.85945 0.942871 12.1755 3.2589 12.1755 6.11835C12.1755 8.9778 9.85945 11.2938 7 11.2938ZM7 9.56866C8.9063 9.56866 10.4503 8.02465 10.4503 6.11835C10.4503 4.21205 8.9063 2.66803 7 2.66803C5.0937 2.66803 3.54968 4.21205 3.54968 6.11835C3.54968 8.02465 5.0937 9.56866 7 9.56866Z"
-            fill="#252931"
-          />
-        </svg>
+        <UserButton afterSignOutUrl="/signin"/>
       </div>
 
       {burgerClicked && (
@@ -126,7 +116,7 @@ function Header() {
         }`}
       >
         <ul className="flex flex-col items-start p-4 space-y-4">
-          <Link to={"/myday"} className=" w-full">
+          <Link to={"/"} className=" w-full">
             <li className="flex gap-3 hover:bg-[#C7CAD0] py-[0.625rem] pl-4 w-full rounded">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

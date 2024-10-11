@@ -2,11 +2,52 @@ import Signin from "./components/Signin";
 import Signup from "./components/Signup";
 import Home from "./pages/Home";
 import { createContext, useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {  RouterProvider } from "react-router-dom";
 import Important from "./pages/Important";
 import ResultsPage from "./pages/ResultsPage";
-import { Navigate } from "react-router-dom";
+import Layout from "./layouts/Layout";
+import UserLayout from "./layouts/UserLayout";
+import { createBrowserRouter } from "react-router-dom";
 export const MyContext = createContext(null);
+import ProtectedRoute from "./components/ProtectedRoute";
+
+
+const router = createBrowserRouter([
+  {
+    element: (
+      <ProtectedRoute>
+        <Layout />
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/Important",
+        element: <Important />,
+      },
+      {
+        path: "/resultspage",
+        element: <ResultsPage />,
+      }
+    ],
+  },
+  {
+    element: <UserLayout />,
+    children: [
+      {
+        path: "/signin",
+        element: <Signin />,
+      },
+      {
+        path: "/signup",
+        element: <Signup />,
+      },
+    ],
+  },
+]);
 function App() {
   const [tasks, setTasks] = useState(() => {
     const savedTasks = localStorage.getItem("tasks");
@@ -55,16 +96,7 @@ function App() {
           getLightColor,
         }}
       >
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Navigate to="/signin" />} />
-            <Route path="/myday" element={<Home />} />
-            <Route path="/signin" element={<Signin />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/important" element={<Important />} />
-            <Route path="/resultspage" element={<ResultsPage />} />
-          </Routes>
-        </BrowserRouter>
+        <RouterProvider router={router}/>
       </MyContext.Provider>
     </div>
   );

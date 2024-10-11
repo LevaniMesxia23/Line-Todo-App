@@ -1,4 +1,3 @@
-import Header from "../components/Header";
 import TaskSearch from "../components/TaskSearch";
 import { format } from "date-fns";
 import { MyContext } from "../App";
@@ -11,7 +10,6 @@ function Important() {
 
   return (
     <div>
-      <Header />
       <div className="px-4">
         <TaskSearch />
         <div>
