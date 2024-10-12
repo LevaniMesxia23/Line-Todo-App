@@ -4,11 +4,42 @@ import { format } from "date-fns";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import TaskSearch from "./TaskSearch";
+// import supabase from "../config/supabaseClient";
 
 function TasksSection() {
-  const { tasks, clickDot, searchTodo, searchClick, setClickDot, setTasks, getLightColor } =
-    useContext(MyContext);
+  const {
+    tasks,
+    clickDot,
+    searchTodo,
+    searchClick,
+    setClickDot,
+    setTasks,
+    getLightColor,
+  } = useContext(MyContext);
   const formattedDate = format(new Date(), "dd/MM/yy");
+
+  // const [fetchError, setFetchError] = useState(null)
+  // const [todos, setTodos] = useState(null)
+
+  // useEffect(() => {
+  //   const fetchTodos = async () => {
+  //     const {data, error} = await supabase
+  //     .from("todos")
+  //     .select('*')
+
+  //     if(error){
+  //       setFetchError("Could not fetch todos")
+  //       setTodos(null)
+  //       console.log(error)
+  //     }
+  //     if(data){
+  //       setTodos(data)
+  //       setFetchError(null)
+  //     }
+  //   }
+
+  //   fetchTodos()
+  // }, [])
 
   useEffect(() => {
     AOS.init({ duration: 500 });
@@ -41,7 +72,7 @@ function TasksSection() {
           text: item.text,
           isImportance: !item.isImportance,
           completed: item.completed,
-          color: getLightColor()
+          color: getLightColor(),
         };
       }
     });
@@ -59,7 +90,7 @@ function TasksSection() {
           text: item.text,
           isImportance: item.isImportance,
           completed: !item.completed,
-          color: getLightColor()
+          color: getLightColor(),
         };
       }
     });
@@ -69,6 +100,17 @@ function TasksSection() {
   };
 
   return (
+    // <div>
+    //   {fetchError && (<p>{fetchError}</p>)}
+    //   {todos && (
+    //     <div>
+    //       {todos.map(todo => (
+    //         <p key={todo.id}>{todo}</p>
+    //       ))}
+    //     </div>
+    //   )} 
+    // </div>
+  
     <div className=" px-4">
       <TaskSearch />
       {(searchClick ? filteredTasks : tasks).map((task, index) => (
@@ -125,7 +167,7 @@ function TasksSection() {
                   data-aos="fade-right"
                   className=" bg-white absolute py-2 px-[0.88rem] rounded-lg mt-7 min-w-[11.75rem] z-10 "
                 >
-                  <ul className=" flex flex-col gap-1" >
+                  <ul className=" flex flex-col gap-1">
                     <div
                       onClick={() => handleAddImportance(index)}
                       className={` flex justify-start py-[0.62rem] hover:bg-[#C7CAD0] border-b-[1px] ${

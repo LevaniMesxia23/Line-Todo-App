@@ -4,7 +4,10 @@ import { Link } from "react-router-dom";
 import { MyContext } from "../App";
 import Result from "../../public/evaluation.png"
 import { UserButton } from "@clerk/clerk-react";
+import LanguageChanger from "./LanguageChanger.jsx";
+
 function Header() {
+
   const { searchClick, setSearchClick, setSearchTodo } = useContext(MyContext);
   const [burgerClicked, setBurgerClicked] = useState(false);
 
@@ -35,12 +38,15 @@ function Header() {
 
   return (
     <header className="flex justify-between items-center p-4 bg-white shadow-md relative z-20">
+      <div className=" flex gap-4 items-center">
       <Hamburger
         toggled={burgerClicked}
         toggle={handleBurger}
         size={24}
         color="black"
       />
+      <LanguageChanger />
+      </div>
       <div className="flex-1 text-center">
         {!searchClick && (
           <div className="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mx-auto">
@@ -57,7 +63,7 @@ function Header() {
         )}
       </div>
 
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-4 pl-[40px] pr-[20px] clear-margins">
         {searchClick && (
           <div className="relative pr-8">
             <svg

@@ -12,6 +12,8 @@ export const MyContext = createContext(null);
 import ProtectedRoute from "./components/ProtectedRoute";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { getLightColor, handleAddTask } from "./functions/TaskFunctions";
+import "./i18n"
+
 const queryClient = new QueryClient()
 
 const router = createBrowserRouter([

@@ -2,3 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@media (max-width: 400px) {
+  .hidden-on-small {
+    display: none;
+  }
+  .clear-margins{
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

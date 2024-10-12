@@ -1,4 +1,3 @@
-
 const getLightColor = () => {
   const r = Math.floor(Math.random() * 156) + 100;
   const g = Math.floor(Math.random() * 156) + 100;
