@@ -10,6 +10,8 @@ import UserLayout from "./layouts/UserLayout";
 import { createBrowserRouter } from "react-router-dom";
 export const MyContext = createContext(null);
 import ProtectedRoute from "./components/ProtectedRoute";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
   {
@@ -48,10 +50,7 @@ const router = createBrowserRouter([
   },
 ]);
 function App() {
-  const [tasks, setTasks] = useState(() => {
-    const savedTasks = localStorage.getItem("tasks");
-    return savedTasks ? JSON.parse(savedTasks) : [];
-  });
+  const [tasks, setTasks] = useState([]);
   const [taskInput, setTaskInput] = useState("");
   const [clickDot, setClickDot] = useState(false);
   const [searchClick, setSearchClick] = useState(false);
@@ -79,24 +78,26 @@ function App() {
 
   return (
     <div>
-      <MyContext.Provider
-        value={{
-          tasks,
-          taskInput,
-          setTasks,
-          setTaskInput,
-          clickDot,
-          setClickDot,
-          searchClick,
-          setSearchClick,
-          searchTodo,
-          setSearchTodo,
-          handleAddTask,
-          getLightColor,
-        }}
-      >
-        <RouterProvider router={router}/>
-      </MyContext.Provider>
+      <QueryClientProvider client={queryClient}>
+        <MyContext.Provider
+          value={{
+            tasks,
+            taskInput,
+            setTasks,
+            setTaskInput,
+            clickDot,
+            setClickDot,
+            searchClick,
+            setSearchClick,
+            searchTodo,
+            setSearchTodo,
+            handleAddTask,
+            getLightColor,
+          }}
+        >
+          <RouterProvider router={router}/>
+        </MyContext.Provider>
+      </QueryClientProvider>
     </div>
   );
 }
