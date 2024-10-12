@@ -13,6 +13,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { getLightColor, handleAddTask } from "./functions/TaskFunctions";
 import "./i18n"
+import { useMediaQuery } from "@uidotdev/usehooks";
 
 const queryClient = new QueryClient()
 
@@ -53,6 +54,12 @@ const router = createBrowserRouter([
   },
 ]);
 function App() {
+  const isDesktop = useMediaQuery(
+    "only screen and (min-width : 1024px)"
+  );
+  const isTablet = useMediaQuery(
+    "only screen and (min-width : 768px)"
+  );
   const [tasks, setTasks] = useState([]);
   const [taskInput, setTaskInput] = useState("");
   const [clickDot, setClickDot] = useState(false);
@@ -78,7 +85,9 @@ function App() {
             handleAddTask: () => handleAddTask(taskInput, tasks, setTasks, setTaskInput),
             getLightColor,
             burgerClicked,
-            setBurgerClicked
+            setBurgerClicked,
+            isDesktop,
+            isTablet
           }}
         >
           <RouterProvider router={router}/>

@@ -15,6 +15,7 @@ function Header() {
     setSearchTodo,
     burgerClicked,
     setBurgerClicked,
+    isDesktop
   } = useContext(MyContext);
 
   const handleBurger = () => {
@@ -41,9 +42,16 @@ function Header() {
     }
   }, [burgerClicked]);
 
+  useEffect(() => {
+    if(isDesktop === true){
+      setSearchClick(true)
+    }
+  },[isDesktop])
+console.log(isDesktop);
+
   return (
     <header className="flex justify-between items-center p-4 bg-white shadow-md relative z-20">
-      <div className=" flex gap-4 items-center">
+      {!isDesktop && <div className=" flex gap-4 items-center">
         <Hamburger
           toggled={burgerClicked}
           toggle={handleBurger}
@@ -51,8 +59,8 @@ function Header() {
           color="black"
         />
         <LanguageChanger />
-      </div>
-      <div className="flex-1 text-center">
+      </div>}
+      {!isDesktop && <div className="flex-1 text-center">
         {!searchClick && (
           <div className="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mx-auto">
             <svg
@@ -66,9 +74,9 @@ function Header() {
             </svg>
           </div>
         )}
-      </div>
+      </div>}
 
-      <div className="flex items-center space-x-4 pl-[40px] pr-[20px] clear-margins">
+      <div className="flex items-center space-x-4 pl-[40px] pr-[20px] clear-margins lg:ml-[25%] lg:w-full lg:px-0 lg:justify-between lg:pr-3">
         {searchClick && (
           <div className="relative pr-8">
             <svg
@@ -126,7 +134,7 @@ function Header() {
       )}
 
       <nav
-        className={`absolute left-0 top-[80px] h-[100vh] w-2/3 bg-white shadow-lg transform transition-transform duration-300 z-10 ${
+        className={`absolute left-0 top-[80px] h-[100vh] w-1/3 bg-white shadow-lg transform transition-transform duration-300 z-10 lg:left-1/4 lg:w-1/4 lg:top-0 lg:pt-[5.1rem] ${
           burgerClicked ? "translate-x-0" : "-translate-x-full"
         }`}
       >

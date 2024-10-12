@@ -13,7 +13,7 @@ function TaskSearch() {
   };
   return (
     <div>
-      <div className="flex justify-center mt-8">
+      <div className="flex justify-center mt-8 lg:ml-[25%]">
         <div className="flex items-center relative w-full max-w-lg mb-[2.5rem]">
           <svg
             className="absolute ml-3"

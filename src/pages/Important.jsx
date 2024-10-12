@@ -12,8 +12,8 @@ function Important() {
 
   return (
     <div>
-      <div className="px-4">
         <TaskSearch />
+      <div className="px-4 lg:ml-[25%]">
         <div>
           {importantTasks.length > 0 ? (
             importantTasks.map((task, index) => (
