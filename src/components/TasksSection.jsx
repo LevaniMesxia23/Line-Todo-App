@@ -5,8 +5,10 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import TaskSearch from "./TaskSearch";
 // import supabase from "../config/supabaseClient";
+import { useTranslation } from "react-i18next";
 
 function TasksSection() {
+  const {t} = useTranslation()
   const {
     tasks,
     clickDot,
@@ -205,7 +207,7 @@ function TasksSection() {
                           />
                         </svg>
                       )}
-                      <li>Importance</li>
+                      <li>{t("Importance")}</li>
                     </div>
 
                     <div
@@ -243,10 +245,10 @@ function TasksSection() {
 
                       {task.completed ? (
                         <li className="text-[#8ac926] line-through">
-                          Complete
+                          {t("Complete")}
                         </li>
                       ) : (
-                        <li>Complete</li>
+                        <li>{t("Complete")}</li>
                       )}
                     </div>
 
@@ -266,7 +268,7 @@ function TasksSection() {
                           strokeLinejoin="round"
                         />
                       </svg>
-                      <li>Edit</li>
+                      <li>{t("Edit")}</li>
                     </div>
 
                     <div
@@ -287,7 +289,7 @@ function TasksSection() {
                           strokeWidth="0.4"
                         />
                       </svg>
-                      <li className="hover:text-[red]">Delete</li>
+                      <li className="hover:text-[red]">{t("Delete")}</li>
                     </div>
                   </ul>
                 </div>

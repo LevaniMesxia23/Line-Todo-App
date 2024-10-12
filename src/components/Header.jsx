@@ -5,9 +5,10 @@ import { MyContext } from "../App";
 import Result from "../../public/evaluation.png"
 import { UserButton } from "@clerk/clerk-react";
 import LanguageChanger from "./LanguageChanger.jsx";
+import { useTranslation } from "react-i18next";
 
 function Header() {
-
+  const { t } = useTranslation();
   const { searchClick, setSearchClick, setSearchTodo } = useContext(MyContext);
   const [burgerClicked, setBurgerClicked] = useState(false);
 
@@ -143,7 +144,7 @@ function Header() {
                 />
               </svg>
 
-              <span className="z-50">My Day</span>
+              <span className="z-50">{t("My Day")}</span>
             </li>
           </Link>
 
@@ -164,7 +165,7 @@ function Header() {
               />
             </svg>
             
-              <span className="z-50">Important</span>
+              <span className="z-50">{t("Important")}</span>
           </li>
           </Link>
 
@@ -172,7 +173,7 @@ function Header() {
             <li className="flex gap-3 hover:bg-[#C7CAD0] py-[0.625rem] pl-4 w-full rounded">
               <img className="w-[22px] h-[22px]" src={Result} alt="" />
 
-              <span className="z-50">Results</span>
+              <span className="z-50">{t("Results")}</span>
             </li>
           </Link>
         </ul>

@@ -2,8 +2,10 @@ import TaskSearch from "../components/TaskSearch";
 import { format } from "date-fns";
 import { MyContext } from "../App";
 import { useContext } from "react";
+import { useTranslation } from "react-i18next";
 
 function Important() {
+  const {t} = useTranslation()
   const { tasks } = useContext(MyContext);
   const formattedDate = format(new Date(), "dd/MM/yy");
   const importantTasks = tasks.filter((task) => task.isImportance);
@@ -50,7 +52,7 @@ function Important() {
               </div>
             ))
           ) : (
-            <h1 className=" text-center">No important tasks found.</h1>
+            <h1 className=" text-center">{t("clearImportant")}</h1>
           )}
         </div>
       </div>

@@ -1,7 +1,9 @@
 import { MyContext } from "../App";
 import { useContext } from "react";
+import { useTranslation } from "react-i18next";
 
 function TaskSearch() {
+  const {t} = useTranslation()
   const { taskInput, setTaskInput, handleAddTask } = useContext(MyContext);
   const handleKeyPress = (e) => {
     if (e.key == "Enter") {
@@ -32,7 +34,7 @@ function TaskSearch() {
             type="text"
             name="task"
             className="pl-[2.88rem] pr-3 py-2 w-full rounded-lg focus:outline-none focus:ring focus:ring-indigo-300 sm:text-sm lg:text-base"
-            placeholder="Add a task"
+            placeholder={t("Add a task")}
             style={{ boxShadow: "0px 1px 8px 0px rgba(0, 0, 0, 0.25)" }}
             value={taskInput}
             onChange={(e) => setTaskInput(e.target.value)}

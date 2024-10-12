@@ -1,6 +1,8 @@
 import PieChart from "../components/PieChart";
 import ResultBoxes from "../components/ResultBoxes";
+import { useTranslation } from "react-i18next";
 export default function ResultsPage() {
+  const {t} = useTranslation()
   return (
     <div>
       <ResultBoxes />
@@ -8,7 +10,7 @@ export default function ResultsPage() {
         <div className="flex flex-col items-center justify-center border-[#E7E8EA] border-[1px] rounded-lg px-[0.88rem]">
           <div className="flex justify-start w-full py-3">
             <h2 className="text-[#252931] text-[1rem] font-medium">
-              All Tasks
+              {t("All Tasks")}
             </h2>
           </div>
           <div className="w-full h-[1px] bg-[#D7D9DD]"></div>
