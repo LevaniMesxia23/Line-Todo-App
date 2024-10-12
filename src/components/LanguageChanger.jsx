@@ -1,19 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import downArrow from "../../public/down-arrow.png";
+import { MyContext } from "../App";
+import { useContext } from "react";
 
 function LanguageChanger() {
+  const {burgerClicked} = useContext(MyContext)
   const { t, i18n } = useTranslation();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
+    if (burgerClicked) {
+      setDropdownOpen((prev) => !prev);
+    }
   };
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
     setDropdownOpen(false);
   };
+
+  useEffect(() => {
+    if(burgerClicked === true){
+      setDropdownOpen(false)
+    }
+  }, [burgerClicked])
+
   return (
     <div>
       <div className="relative " onClick={toggleDropdown}>

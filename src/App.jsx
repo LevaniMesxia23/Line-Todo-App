@@ -58,6 +58,7 @@ function App() {
   const [clickDot, setClickDot] = useState(false);
   const [searchClick, setSearchClick] = useState(false);
   const [searchTodo, setSearchTodo] = useState("");
+  const [burgerClicked, setBurgerClicked] = useState(false);
 
   return (
     <div>
@@ -75,7 +76,9 @@ function App() {
             searchTodo,
             setSearchTodo,
             handleAddTask: () => handleAddTask(taskInput, tasks, setTasks, setTaskInput),
-            getLightColor
+            getLightColor,
+            burgerClicked,
+            setBurgerClicked
           }}
         >
           <RouterProvider router={router}/>
