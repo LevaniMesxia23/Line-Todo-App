@@ -142,7 +142,11 @@ console.log(isDesktop);
         >
 
         <ul className="flex flex-col items-start p-4 space-y-4">
-          <NavLink to="/" className={({isActive}) => `w-full rounded-lg ${isActive ? 'bg-[#C7CAD0]' : ''}`} onClick={handleLinkClick}>
+          <NavLink to="/" className={({ isActive }) =>
+      `w-full flex items-center p-2 rounded-md transition-all duration-300 ${
+        isActive ? 'bg-[#C7CAD0] scale-105' : 'bg-transparent hover:bg-[#D0D4D4]'
+      }`
+    } onClick={handleLinkClick}>
             <li className="flex gap-3 hover:bg-[#C7CAD0] py-[0.625rem] pl-4 w-full rounded">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -163,7 +167,11 @@ console.log(isDesktop);
             </li>
           </NavLink>
 
-          <NavLink to="/important" className={({isActive}) => `w-full rounded-lg ${isActive ? 'bg-[#C7CAD0]' : ''}`} onClick={handleLinkClick}>
+          <NavLink to="/important" className={({ isActive }) =>
+      `w-full flex items-center p-2 rounded-md transition-all duration-300 ${
+        isActive ? 'bg-[#C7CAD0] scale-105' : 'bg-transparent hover:bg-[#D0D4D4]'
+      }`
+    } onClick={handleLinkClick}>
             <li className=" flex gap-3 hover:bg-[#C7CAD0] py-[0.625rem] pl-4 w-full rounded ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -185,7 +193,11 @@ console.log(isDesktop);
           </NavLink>
 
           <NavLink
-            to="/resultspage" className={({isActive}) => `w-full rounded-lg ${isActive ? 'bg-[#C7CAD0]' : ''}`}
+            to="/resultspage" className={({ isActive }) =>
+              `w-full flex items-center p-2 rounded-md transition-all duration-300 ${
+                isActive ? 'bg-[#C7CAD0] scale-105' : 'bg-transparent hover:bg-[#D0D4D4]'
+              }`
+            }
             onClick={handleLinkClick}
           >
             <li className="flex gap-3 hover:bg-[#C7CAD0] py-[0.625rem] pl-4 w-full rounded">
