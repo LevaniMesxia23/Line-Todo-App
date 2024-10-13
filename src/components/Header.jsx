@@ -6,6 +6,7 @@ import Result from "../../public/evaluation.png";
 import { UserButton } from "@clerk/clerk-react";
 import LanguageChanger from "./LanguageChanger.jsx";
 import { useTranslation } from "react-i18next";
+import { NavLink } from "react-router-dom";
 
 function Header() {
   const { t } = useTranslation();
@@ -141,7 +142,7 @@ console.log(isDesktop);
         >
 
         <ul className="flex flex-col items-start p-4 space-y-4">
-          <Link to={"/"} className=" w-full" onClick={handleLinkClick}>
+          <NavLink to="/" className={({isActive}) => `w-full rounded-lg ${isActive ? 'bg-[#C7CAD0]' : ''}`} onClick={handleLinkClick}>
             <li className="flex gap-3 hover:bg-[#C7CAD0] py-[0.625rem] pl-4 w-full rounded">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -160,9 +161,9 @@ console.log(isDesktop);
 
               <span className="z-50">{t("My Day")}</span>
             </li>
-          </Link>
+          </NavLink>
 
-          <Link to={"/important"} className=" w-full" onClick={handleLinkClick}>
+          <NavLink to="/important" className={({isActive}) => `w-full rounded-lg ${isActive ? 'bg-[#C7CAD0]' : ''}`} onClick={handleLinkClick}>
             <li className=" flex gap-3 hover:bg-[#C7CAD0] py-[0.625rem] pl-4 w-full rounded ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -181,11 +182,10 @@ console.log(isDesktop);
 
               <span className="z-50">{t("Important")}</span>
             </li>
-          </Link>
+          </NavLink>
 
-          <Link
-            to={"/resultspage"}
-            className=" w-full"
+          <NavLink
+            to="/resultspage" className={({isActive}) => `w-full rounded-lg ${isActive ? 'bg-[#C7CAD0]' : ''}`}
             onClick={handleLinkClick}
           >
             <li className="flex gap-3 hover:bg-[#C7CAD0] py-[0.625rem] pl-4 w-full rounded">
@@ -193,7 +193,7 @@ console.log(isDesktop);
 
               <span className="z-50">{t("Results")}</span>
             </li>
-          </Link>
+          </NavLink>
         </ul>
       </nav>
     </header>

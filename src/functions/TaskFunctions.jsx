@@ -5,6 +5,7 @@ const getLightColor = () => {
   return `rgb(${r}, ${g}, ${b})`;
 };
 
+
 const handleAddTask = (taskInput, tasks, setTasks, setTaskInput) => {
   if (taskInput.trim()) {
     const newTask = {
