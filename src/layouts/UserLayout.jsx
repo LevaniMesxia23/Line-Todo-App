@@ -1,11 +1,25 @@
-import { Outlet } from "react-router-dom"
+import { Outlet } from "react-router-dom";
+import { MyContext } from "../App";
+import { useContext } from "react";
+import Pattern from "../components/Patterns";
 
-function UserLayout() {
+const UserLayout = () => {
+  const { isDesktop } = useContext(MyContext);
   return (
-    <div className=" w-100 h-100">
-      <Outlet />
-    </div>
-  )
-}
+    <div
+      className={`w-full h-screen flex ${
+        isDesktop
+          ? "justify-between items-center gap-[175px]"
+          : "justify-center items-center "
+      } xl:pl-[66px] xl:pr-[45px] overflow-hidden max-w-[1280px] mx-auto`}
+    >
+      {isDesktop && <Pattern />}
 
-export default UserLayout
+      <div className={` w-[100vw] flex items-center justify-center`}>
+        <Outlet />
+      </div>
+    </div>
+  );
+};
+
+export default UserLayout;

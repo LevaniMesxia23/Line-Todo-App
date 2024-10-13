@@ -1,6 +1,5 @@
 import { useEffect, useContext } from "react";
 import { Twirl as Hamburger } from "hamburger-react";
-import { Link } from "react-router-dom";
 import { MyContext } from "../App";
 import Result from "../../public/evaluation.png";
 import { UserButton } from "@clerk/clerk-react";
@@ -147,7 +146,7 @@ console.log(isDesktop);
         isActive ? 'bg-[#C7CAD0] scale-105' : 'bg-transparent hover:bg-[#D0D4D4]'
       }`
     } onClick={handleLinkClick}>
-            <li className="flex gap-3 hover:bg-[#C7CAD0] py-[0.625rem] pl-4 w-full rounded">
+            <li className="flex gap-3  py-[0.625rem] pl-4 w-full rounded">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="22"
@@ -172,7 +171,7 @@ console.log(isDesktop);
         isActive ? 'bg-[#C7CAD0] scale-105' : 'bg-transparent hover:bg-[#D0D4D4]'
       }`
     } onClick={handleLinkClick}>
-            <li className=" flex gap-3 hover:bg-[#C7CAD0] py-[0.625rem] pl-4 w-full rounded ">
+            <li className=" flex gap-3 ] py-[0.625rem] pl-4 w-full rounded ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="22"
@@ -200,7 +199,7 @@ console.log(isDesktop);
             }
             onClick={handleLinkClick}
           >
-            <li className="flex gap-3 hover:bg-[#C7CAD0] py-[0.625rem] pl-4 w-full rounded">
+            <li className="flex gap-3 py-[0.625rem] pl-4 w-full rounded">
               <img className="w-[22px] h-[22px]" src={Result} alt="" />
 
               <span className="z-50">{t("Results")}</span>
