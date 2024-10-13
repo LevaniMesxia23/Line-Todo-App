@@ -8,12 +8,13 @@ import {
 } from "chart.js";
 import { useContext } from "react";
 import { MyContext } from "../App";
+import { useTranslation } from "react-i18next";
 
 ChartJs.register(ArcElement, Title, Tooltip, Legend);
 
 function PieChart() {
   const { tasks } = useContext(MyContext);
-
+  const {t} = useTranslation()
   const completedTasks = tasks.filter(task => task.completed).length;
   const inProgressTasks = tasks.filter(task => !task.completed).length;
   const stuckTasks = tasks.filter(task => task.isImportance).length;
@@ -41,15 +42,10 @@ function PieChart() {
 
   const options = {
     responsive: true,
+    cutout: '0%', // Set to 0 for a fully filled circle
     plugins: {
       legend: {
-        display: true,
-        position: 'bottom',
-        align: 'start',
-        labels: {
-          boxWidth: 20,
-          padding: 20,
-        },
+        display: false, // Hide the default legend
       },
       tooltip: {
         callbacks: {
@@ -65,8 +61,23 @@ function PieChart() {
   };
 
   return (
-    <div className="flex flex-col mt-10">
-      <Pie data={data} options={options} />
+    <div className="flex items-center mt-10 lg:gap-20 md:flex-row lg:flex-row mb-12 flex-col gap-12">
+      <div className="flex-1">
+        <Pie data={data} options={options}/>
+      </div>
+      <div className="ml-5">
+        <ul className="mt-2 flex flex-col gap-6">
+          <li>
+            <span style={{ color: '#80BC00' }}>●</span> {t("Completed")}: {completedTasks} ({((completedTasks / totalTasks) * 100).toFixed(1)}%)
+          </li>
+          <li>
+            <span style={{ color: '#FFA400' }}>●</span> {t("In Progress")}: {inProgressTasks} ({((inProgressTasks / totalTasks) * 100).toFixed(1)}%)
+          </li>
+          <li>
+            <span style={{ color: '#6E7C7C' }}>●</span> {t("Important")}: {stuckTasks} ({((stuckTasks / totalTasks) * 100).toFixed(1)}%)
+          </li>
+        </ul>
+      </div>
     </div>
   );
 }
