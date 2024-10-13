@@ -16,6 +16,7 @@ function TasksSection() {
     searchClick,
     setClickDot,
     setTasks,
+    isMedium
   } = useContext(MyContext);
   const formattedDate = format(new Date(), "dd/MM/yy");
 
@@ -110,7 +111,7 @@ function TasksSection() {
 <>
 
       <TaskSearch />
-    <div className=" px-4 lg:grid lg:grid-cols-3 lg:gap-2 lg:ml-[25%] md:grid md:grid-cols-2 md:gap-2">
+    <div className={`px-4 grid lg:grid lg:grid-cols-3 lg:gap-2 ${isMedium && "grid-cols-2 gap-2"} lg:ml-[25%] md:grid md:grid-cols-2 md:gap-2`} >
       {(searchClick ? filteredTasks : tasks).map((task, index) => (
         <div
           key={index}

@@ -63,6 +63,9 @@ function App() {
   const isMobile = useMediaQuery(
     "only screen and (max-width : 768px)"
   )
+  const isMedium = useMediaQuery(
+    "only screen and (min-width : 540px)"
+  )
   const [tasks, setTasks] = useState([]);
   const [taskInput, setTaskInput] = useState("");
   const [clickDot, setClickDot] = useState(false);
@@ -91,7 +94,8 @@ function App() {
             setBurgerClicked,
             isDesktop,
             isTablet,
-            isMobile
+            isMobile,
+            isMedium
           }}
         >
           <RouterProvider router={router}/>

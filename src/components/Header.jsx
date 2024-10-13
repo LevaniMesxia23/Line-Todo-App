@@ -122,7 +122,10 @@ console.log(isDesktop);
         {!searchClick && (
           <div className="h-[1rem] bg-[#82868F] w-[0.0625rem]"></div>
         )}
+        <div className=" flex gap-4 items-center">
+        {isDesktop && <LanguageChanger />}
         <UserButton afterSignOutUrl="/signin" />
+        </div>
       </div>
 
       {burgerClicked && (

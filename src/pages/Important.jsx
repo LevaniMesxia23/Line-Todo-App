@@ -5,18 +5,18 @@ import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 
 function Important() {
-  const {t} = useTranslation()
+  const { t } = useTranslation();
   const { tasks } = useContext(MyContext);
   const formattedDate = format(new Date(), "dd/MM/yy");
   const importantTasks = tasks.filter((task) => task.isImportance);
 
   return (
     <div>
-        <TaskSearch />
+      <TaskSearch />
       <div className="px-4 ">
-        <div className="lg:grid lg:grid-cols-3 lg:gap-2 lg:ml-[25%] md:grid md:grid-cols-2 md:gap-2">
-          {importantTasks.length > 0 ? (
-            importantTasks.map((task, index) => (
+        {importantTasks.length > 0 ? (
+          <div className="lg:grid lg:grid-cols-3 lg:gap-2 lg:ml-[25%] md:grid md:grid-cols-2 md:gap-2">
+            {importantTasks.map((task, index) => (
               <div
                 key={index}
                 className="  rounded-[0.625rem] mb-6"
@@ -50,13 +50,11 @@ function Important() {
                   </p>
                 </div>
               </div>
-            ))
-          ) : (
-            <div className="!flex w-full justify-center items-center">
-              <h1 style={{pointerEvents: "none"}} className=" text-center">{t("clearImportant")}</h1>
-            </div>
-          )}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <h1 className=" text-center lg:ml-[25%]">{t("clearImportant")}</h1>
+        )}
       </div>
     </div>
   );

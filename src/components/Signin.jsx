@@ -6,7 +6,5 @@ function Signin() {
       <SignIn signUpUrl="/signup" forceRedirectUrl={"/"}/>
     </div>
   )
-  
 }
-
 export default Signin;
