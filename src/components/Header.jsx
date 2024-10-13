@@ -15,7 +15,8 @@ function Header() {
     setSearchTodo,
     burgerClicked,
     setBurgerClicked,
-    isDesktop
+    isDesktop,
+    isMobile
   } = useContext(MyContext);
 
   const handleBurger = () => {
@@ -80,7 +81,7 @@ console.log(isDesktop);
         {searchClick && (
           <div className="relative pr-8">
             <svg
-              className="absolute left-[3rem] top-[10px]"
+              className="absolute left-[3rem] top-[10px] "
               onClick={handleSearchClick}
               xmlns="http://www.w3.org/2000/svg"
               width="18"
@@ -133,11 +134,12 @@ console.log(isDesktop);
         ></div>
       )}
 
-      <nav
-        className={`absolute left-0 top-[80px] h-[100vh] w-1/3 bg-white shadow-lg transform transition-transform duration-300 z-10 lg:left-1/4 lg:w-1/4 lg:top-0 lg:pt-[5.1rem] ${
-          burgerClicked ? "translate-x-0" : "-translate-x-full"
-        }`}
-      >
+        <nav
+          className={`fixed left-0 top-[80px] bottom-0 ${isMobile ? "w-1/2"  : "w-1/3"} bg-white shadow-lg transform transition-transform duration-300 z-10 lg:left-1/4 lg:w-1/4 lg:top-0 lg:pt-[5.1rem] lg:overflow-y-auto ${
+            burgerClicked ? "translate-x-0" : "-translate-x-full"
+          }`}
+        >
+
         <ul className="flex flex-col items-start p-4 space-y-4">
           <Link to={"/"} className=" w-full" onClick={handleLinkClick}>
             <li className="flex gap-3 hover:bg-[#C7CAD0] py-[0.625rem] pl-4 w-full rounded">

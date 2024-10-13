@@ -13,8 +13,8 @@ function Important() {
   return (
     <div>
         <TaskSearch />
-      <div className="px-4 lg:ml-[25%]">
-        <div>
+      <div className="px-4 ">
+        <div className="lg:grid lg:grid-cols-3 lg:gap-2 lg:ml-[25%] md:grid md:grid-cols-2 md:gap-2">
           {importantTasks.length > 0 ? (
             importantTasks.map((task, index) => (
               <div
@@ -52,7 +52,9 @@ function Important() {
               </div>
             ))
           ) : (
-            <h1 className=" text-center">{t("clearImportant")}</h1>
+            <div className="!flex w-full justify-center items-center">
+              <h1 style={{pointerEvents: "none"}} className=" text-center">{t("clearImportant")}</h1>
+            </div>
           )}
         </div>
       </div>
