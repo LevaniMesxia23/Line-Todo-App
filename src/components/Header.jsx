@@ -21,13 +21,11 @@ function Header() {
 
   const handleBurger = () => {
     setBurgerClicked(!burgerClicked);
-    console.log(burgerClicked);
   };
 
   const handleLinkClick = () => {
     if (burgerClicked) {
       setBurgerClicked(false);
-      console.log(burgerClicked);
     }
   };
 
@@ -48,7 +46,6 @@ function Header() {
       setSearchClick(true)
     }
   },[isDesktop])
-console.log(isDesktop);
 
   return (
     <header className="flex justify-between items-center p-4 bg-white shadow-md relative z-20">

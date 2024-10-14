@@ -17,7 +17,7 @@ function PieChart() {
   const {t} = useTranslation()
   const completedTasks = tasks.filter(task => task.completed).length;
   const inProgressTasks = tasks.filter(task => !task.completed).length;
-  const stuckTasks = tasks.filter(task => task.isImportance).length;
+  const stuckTasks = tasks.filter(task => task.important).length;
   const totalTasks = tasks.length;
 
   const data = {

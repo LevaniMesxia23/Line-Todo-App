@@ -2,7 +2,7 @@ import Signin from "./components/Signin";
 import Signup from "./components/Signup";
 import Home from "./pages/Home";
 import { createContext, useState } from "react";
-import {  RouterProvider } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
 import Important from "./pages/Important";
 import ResultsPage from "./pages/ResultsPage";
 import Layout from "./layouts/Layout";
@@ -72,6 +72,7 @@ function App() {
   const [searchClick, setSearchClick] = useState(false);
   const [searchTodo, setSearchTodo] = useState("");
   const [burgerClicked, setBurgerClicked] = useState(false);
+  // const { user, isLoaded } = useUser();
 
   return (
     <div>
