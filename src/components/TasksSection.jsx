@@ -4,12 +4,9 @@ import { format } from "date-fns";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import TaskSearch from "./TaskSearch";
-// import supabase from "../config/supabaseClient";
-
 import { useTranslation } from "react-i18next";
 import {
   DateIcon,
-  ThreeDotIcon,
   CompletedIconWhite,
   ImportanceIcon,
   ImportantIconGreen,
@@ -17,24 +14,24 @@ import {
   CompletedIconGreen,
   CompletedIcon,
   EditIcon,
-  DeleteIcon
+  DeleteIcon,
 } from "../icons/icons";
+// import { useGetAllTodos } from "../Hooks/AddHook";
+import { useHandleImportant } from "../supabaseAPI/UseHandleImportant";
+// import {useAddTodo} from "../Hooks/useAddTodo";
 
-export const useTaskContext = () => {
+ const useTaskContext = () => {
   const { setClickDot } = useContext(MyContext);
 
   const handleClickDots = (index) => {
     setClickDot((prevIndex) => (prevIndex === index ? null : index));
   };
-
   return { handleClickDots };
 };
 
-export const handleClickDots = (index) => {
-  const { setClickDot } = useContext(MyContext);
-  setClickDot((prevIndex) => (prevIndex === index ? null : index));
-};
 function TasksSection() {
+  // const {addTodo} = useAddTodo()
+  // const { data: todosData, isError, isLoading, error } = useGetAllTodos();
   const { t } = useTranslation();
   const { handleClickDots } = useTaskContext();
   const {
@@ -48,12 +45,14 @@ function TasksSection() {
   } = useContext(MyContext);
   const formattedDate = format(new Date(), "dd/MM/yy");
 
+  const { toggleImportant } = useHandleImportant(tasks, setTasks);
+
   useEffect(() => {
     AOS.init({ duration: 500 });
   }, []);
 
   const filteredTasks = tasks.filter((task) =>
-    task.text.toLowerCase().includes(searchTodo)
+    task?.description.toLowerCase().includes(searchTodo)
   );
 
   const deleteTask = (index) => {
@@ -64,19 +63,9 @@ function TasksSection() {
   };
 
   const handleAddImportance = (index) => {
-    let arr = tasks.map((item, i) => {
-      if (index !== i) {
-        return item;
-      } else {
-        return {
-          ...item,
-          isImportance: !item.isImportance,
-        };
-      }
-    });
+    toggleImportant(index); 
     handleClickDots(false);
-    console.log(arr);
-    setTasks(arr);
+    // console.log(todosData)
   };
 
   const handleAddComplete = (index) => {
@@ -86,7 +75,7 @@ function TasksSection() {
       } else {
         return {
           ...item,
-          completed: !item.completed,
+          complate: !item.complate,
         };
       }
     });
@@ -94,6 +83,13 @@ function TasksSection() {
     console.log(arr);
     setTasks(arr);
   };
+
+  // if (isLoading) {
+  //   return <p>Loading...</p>;
+  // }
+  // if (isError) {
+  //   return <p>{error.message}</p>;
+  // }
 
   return (
     <>
@@ -106,10 +102,9 @@ function TasksSection() {
         {(searchClick ? filteredTasks : tasks).map((task, index) => (
           <div
             key={index}
-            className="  rounded-[0.625rem] mb-6 "
-            style={{ backgroundColor: task.color }}
+            className="rounded-[0.625rem] mb-6"
           >
-            <div className="flex flex-col justify-between px-4 py-3 ">
+            <div className="flex flex-col justify-between px-4 py-3">
               <div className="bg-[#FDF8F2] max-w-[8rem] h-[30px] px-[10px] rounded-full flex justify-start gap-2 items-center mb-4">
                 <DateIcon />
                 <span className="text-[14px] font-normal text-textColor leading-6">
@@ -117,16 +112,14 @@ function TasksSection() {
                 </span>
               </div>
               <p className="pt-4 text-textColor break-words text-[14px] font-normal leading-6">
-                {task.text}
+                {task?.description}
               </p>
 
-              <div className=" flex justify-end mt-[1.62rem] relative cursor-pointer">
-                <div className=" mr-2">
-                  {task.completed && <CompletedIconWhite />}
+              <div className="flex justify-end mt-[1.62rem] relative cursor-pointer">
+                <div className="mr-2">
+                  {task?.complate && <CompletedIconWhite />}
                 </div>
-
-                <div>{task.isImportance && <ImportanceIconWhite />}</div>
-
+                <div>{task?.important && <ImportanceIconWhite />}</div>
                 <div>
                   <svg
                     onClick={() => handleClickDots(index)}
@@ -146,16 +139,16 @@ function TasksSection() {
                   {clickDot === index && (
                     <div
                       data-aos="fade-right"
-                      className=" bg-white absolute py-2 px-[0.88rem] rounded-lg mt-1 -ml-[148px] min-w-[11.75rem] z-10 "
+                      className="bg-white absolute py-2 px-[0.88rem] rounded-lg mt-1 -ml-[148px] min-w-[11.75rem] z-10"
                     >
-                      <ul className=" flex flex-col gap-1">
+                      <ul className="flex flex-col gap-1">
                         <div
                           onClick={() => handleAddImportance(index)}
-                          className={` flex justify-start py-[0.62rem] hover:bg-[#C7CAD0] border-b-[1px] ${
-                            tasks[index].isImportance && "text-[#8ac926]"
-                          }  gap-3 w-full pl-2  cursor-pointer`}
+                          className={`flex justify-start py-[0.62rem] hover:bg-[#C7CAD0] border-b-[1px] ${
+                            tasks[index]?.important && "text-[#8ac926]"
+                          } gap-3 w-full pl-2 cursor-pointer`}
                         >
-                          {!task.isImportance ? (
+                          {!task?.important ? (
                             <ImportanceIcon />
                           ) : (
                             <ImportantIconGreen />
@@ -167,15 +160,16 @@ function TasksSection() {
                           onClick={() => {
                             handleAddComplete(index);
                           }}
-                          className=" flex justify-start py-[0.62rem] gap-3 w-full hover:bg-[#C7CAD0] pl-2  cursor-pointer border-b-[1px]"
+                          className="flex justify-start py-[0.62rem] gap-3 w-full hover:bg-[#C7CAD0] pl-2 cursor-pointer border-b-[1px]"
                         >
-                          {task.completed ? (
+                          {task?.complate ? (
                             <CompletedIconGreen />
                           ) : (
                             <CompletedIcon />
+                          
                           )}
 
-                          {task.completed ? (
+                          {task?.complate ? (
                             <li className="text-[#8ac926] line-through">
                               {t("Complete")}
                             </li>

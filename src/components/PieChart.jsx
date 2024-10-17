@@ -15,8 +15,8 @@ ChartJs.register(ArcElement, Title, Tooltip, Legend);
 function PieChart() {
   const { tasks } = useContext(MyContext);
   const {t} = useTranslation()
-  const completedTasks = tasks.filter(task => task.completed).length;
-  const inProgressTasks = tasks.filter(task => !task.completed).length;
+  const completedTasks = tasks.filter(task => task.complate).length;
+  const inProgressTasks = tasks.filter(task => !task.complate).length;
   const stuckTasks = tasks.filter(task => task.important).length;
   const totalTasks = tasks.length;
 

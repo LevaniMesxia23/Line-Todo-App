@@ -9,8 +9,8 @@ function ResultBoxes() {
   const taskStats = [
     { label: t("All Tasks"), count: tasks.length },
     { label: t("Important"), count: tasks.filter(task => task.important).length },
-    { label: t("In Progress"), count: tasks.filter(task => !task.completed).length },
-    { label: t("Done"), count: tasks.filter(task => task.completed).length },
+    { label: t("In Progress"), count: tasks.filter(task => !task.complate).length },
+    { label: t("Done"), count: tasks.filter(task => task.complate).length },
   ];
 
   return (

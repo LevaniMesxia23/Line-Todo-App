@@ -8,7 +8,7 @@ function Important() {
   const { t } = useTranslation();
   const { tasks } = useContext(MyContext);
   const formattedDate = format(new Date(), "dd/MM/yy");
-  const importantTasks = tasks.filter((task) => task.isImportance);
+  const importantTasks = tasks.filter((task) => task.important);
 
   return (
     <div>
@@ -20,7 +20,7 @@ function Important() {
               <div
                 key={index}
                 className="  rounded-[0.625rem] mb-6"
-                style={{ backgroundColor: task.color }}
+                // style={{ backgroundColor: task.color }}
               >
                 <div className="flex flex-col justify-between px-4 py-3 ">
                   <div className="bg-[#FDF8F2] max-w-[8rem] h-[30px] px-[10px] rounded-full flex justify-start gap-2 items-center mb-4">
@@ -46,7 +46,7 @@ function Important() {
                     </span>
                   </div>
                   <p className="pt-4 text-textColor break-words text-[14px] font-normal leading-6">
-                    {task.text}
+                    {task.description}
                   </p>
                 </div>
               </div>

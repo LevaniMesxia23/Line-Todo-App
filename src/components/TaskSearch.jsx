@@ -1,14 +1,19 @@
 import { MyContext } from "../App";
 import { useContext } from "react";
 import { useTranslation } from "react-i18next";
+// import {useAddTodo} from "../Hooks/useAddTodo";
+// import { useUser } from "@clerk/clerk-react";
 
 function TaskSearch() {
+  // const { addTodo, data, isLoading } = useAddTodo();
+  const { taskInput, setTaskInput, apiAddTodo } = useContext(MyContext);
+  // const {user} = useUser()
+  // const userId = user.id
   const {t} = useTranslation()
-  const { taskInput, setTaskInput, handleAddTask } = useContext(MyContext);
   const handleKeyPress = (e) => {
     if (e.key == "Enter") {
       e.preventDefault();
-      handleAddTask();
+      // apiAddTodo();
     }
   };
   return (
@@ -22,7 +27,7 @@ function TaskSearch() {
             height="24"
             viewBox="0 0 24 24"
             fill="none"
-            onClick={handleAddTask}
+            // onClick={() => addTodo({userId, complate: false,important:false,description: taskInput})}
           >
             <path
               d="M12 6V18M18 12H6"
