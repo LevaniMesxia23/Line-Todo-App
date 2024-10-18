@@ -11,7 +11,7 @@ import { createBrowserRouter } from "react-router-dom";
 export const MyContext = createContext(null);
 import ProtectedRoute from "./components/ProtectedRoute";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-//import { apiAddTodo, apiUpdateTodo } from "./supabaseAPI/TodoApi";
+import { apiAddTodo } from "./supabaseAPI/TodoApi";
 
 import "./i18n"
 import { useMediaQuery } from "@uidotdev/usehooks";
@@ -74,9 +74,8 @@ function App() {
   const [searchClick, setSearchClick] = useState(false);
   const [searchTodo, setSearchTodo] = useState("");
   const [burgerClicked, setBurgerClicked] = useState(false);
-  const { user, isLoaded } = useUser();
+  const { user } = useUser();
   console.log(user?.id);
-  
 
   return (
     <div>
@@ -93,6 +92,8 @@ function App() {
             setSearchClick,
             searchTodo,
             setSearchTodo,
+            apiAddTodo: (userId, completed, important, description) =>
+              apiAddTodo(userId, completed, important, description),
             // apiAddTodo: (taskInput, userId) => apiAddTodo(taskInput, userId),
             // apiUpdateTodo: (todoId, updates) => apiUpdateTodo(todoId, updates), 
             // getLightColor,

@@ -1,21 +1,51 @@
 import { MyContext } from "../App";
 import { useContext } from "react";
 import { useTranslation } from "react-i18next";
-// import {useAddTodo} from "../Hooks/useAddTodo";
-// import { useUser } from "@clerk/clerk-react";
+import { useMutation } from "@tanstack/react-query";
+import { apiAddTodo } from "../supabaseAPI/TodoApi"; 
 
 function TaskSearch() {
-  // const { addTodo, data, isLoading } = useAddTodo();
-  const { taskInput, setTaskInput, apiAddTodo } = useContext(MyContext);
-  // const {user} = useUser()
-  // const userId = user.id
-  const {t} = useTranslation()
+  const { taskInput, setTaskInput, tasks, setTasks } = useContext(MyContext);
+  const { t } = useTranslation();
+  const userId = "userId"; 
+
+  const mutation = useMutation({
+    mutationFn: ({ userId, completed, important, description }) =>
+      apiAddTodo(userId, completed, important, description),
+    onSuccess: (newTask) => {
+      console.log("Task added Successfully");
+
+      const completeTask = {
+        ...newTask, 
+        complate: false, 
+        important: false, 
+      };
+
+      setTaskInput(""); 
+      setTasks((prevTasks) => [...prevTasks, completeTask]);
+      console.log(tasks) 
+    },
+    onError: (error) => {
+      console.error("Error adding task:", error.message);
+    },
+  });
+
   const handleKeyPress = (e) => {
-    if (e.key == "Enter") {
+    if (e.key === "Enter" && taskInput.trim() !== "") {
       e.preventDefault();
-      // apiAddTodo();
+
+      const completed = false; 
+      const important = false; 
+
+      mutation.mutate({
+        userId,
+        completed,
+        important,
+        description: taskInput,
+      });
     }
   };
+
   return (
     <div>
       <div className="flex justify-center mt-8 lg:ml-[25%]">
@@ -27,7 +57,6 @@ function TaskSearch() {
             height="24"
             viewBox="0 0 24 24"
             fill="none"
-            // onClick={() => addTodo({userId, complate: false,important:false,description: taskInput})}
           >
             <path
               d="M12 6V18M18 12H6"

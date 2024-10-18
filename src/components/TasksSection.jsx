@@ -52,7 +52,7 @@ function TasksSection() {
   }, []);
 
   const filteredTasks = tasks.filter((task) =>
-    task?.description.toLowerCase().includes(searchTodo)
+    task?.description?.toLowerCase().includes(searchTodo)
   );
 
   const deleteTask = (index) => {

@@ -1,13 +1,12 @@
 import { supabase } from "../config/supabaseClient";
 
 export const fetchTodos = async (userId) => {
-
   console.log(userId)
   const { data: todos, error } = await supabase
   .from("todos")
   .select("*")
   .eq("user_id", userId)
-  
+  console.log(userId)
   return { todos, error };
 };
 export default fetchTodos;
